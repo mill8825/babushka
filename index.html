@@ -12,15 +12,24 @@
     <nav>
       <div class="container">
         <div class="center">
-          <button kategori="Alle" class="valgt">Alle</button>
-          <button kategori="Forretter">Forretter</button>
-          <button kategori="Hovedretter">Hovedretter</button>
-          <button kategori="Desserter">Desserter</button>
+          <button data-kategori="Alle" class="valgt">Alle</button>
+          <button data-kategori="Forretter">Forretter</button>
+          <button data-kategori="Hovedretter">Hovedretter</button>
+          <button data-kategori="Desserter">Desserter</button>
         </div>
       </div>
     </nav>
   </header>
+  <main>
   <body>
+    <template>
+      <article>
+        <img src="" alt="" class="billede" />
+        <h2 class="ret"></h2>
+        <p class="Pris"></p>
+        <p class="Beskrivelse"></p>
+      </article>
+    </template>
     <script>
       const header = document.querySelector("header h1");
       const myHeaders = {
@@ -29,18 +38,18 @@
 
       document.addEventListener("DOMContentLoaded", start);
 
-      let personer;
+      let retter;
       let filter = "alle";
       function start() {
         const filterKnapper = document.querySelectorAll("nav button");
         filterKnapper.forEach((knap) =>
-          knap.addEventListener("click", filtrerPersoner)
+          knap.addEventListener("click", filtrerRetter)
         );
         loadJSON();
       }
 
-      function filtrerPersoner() {
-        filter = this.dataset.troende;
+      function filtrerRetter() {
+        filter = this.dataset.kategori;
       }
 
       async function loadJSON() {
@@ -48,10 +57,13 @@
           "https://babushka-dd8a.restdb.io/rest/menu",
           { headers: myHeaders }
         );
-        personer = await JSONdata.json();
-        console.log("Personer", personer);
-        visPersoner();
+        retter = await JSONdata.json();
+        console.log("Retter", retter);
+        vis();
       }
+
+      let main = document.querySelector("section");
+      let temp = document.querySelector("template")
 
       function vis() {
         console.log(retter);
@@ -74,5 +86,6 @@
         });
       }
     </script>
+    </main>
   </body>
 </html>
