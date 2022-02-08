@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bistro Babushka</title>
+    <style></style>
+  </head>
+  <header>
+    <h1></h1>
+    <nav>
+      <div class="container">
+        <div class="center">
+          <button kategori="Alle" class="valgt">Alle</button>
+          <button kategori="Forretter">Forretter</button>
+          <button kategori="Hovedretter">Hovedretter</button>
+          <button kategori="Desserter">Desserter</button>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <body>
+    <script>
+      const header = document.querySelector("header h1");
+      const myHeaders = {
+        "x-apikey": "600ec2fb1346a1524ff12de4",
+      };
+
+      document.addEventListener("DOMContentLoaded", start);
+
+      let personer;
+      let filter = "alle";
+      function start() {
+        const filterKnapper = document.querySelectorAll("nav button");
+        filterKnapper.forEach((knap) =>
+          knap.addEventListener("click", filtrerPersoner)
+        );
+        loadJSON();
+      }
+
+      function filtrerPersoner() {
+        filter = this.dataset.troende;
+      }
+
+      async function loadJSON() {
+        const JSONdata = await fetch(
+          "https://babushka-dd8a.restdb.io/rest/menu",
+          { headers: myHeaders }
+        );
+        personer = await JSONdata.json();
+        console.log("Personer", personer);
+        visPersoner();
+      }
+
+      function vis() {
+        console.log(retter);
+        main.innerHTML = "";
+        retter.forEach((ret) => {
+          if (filter == ret.kategori || filter == "alle") {
+            let klon = temp.cloneNode(true).content;
+            klon.querySelector("img").src =
+              "medium/" + ret.billednavn + "md.jpg";
+            klon.querySelector("h3").textContent = `${ret.navn}`;
+
+            klon.querySelector(
+              ".beskrivelse"
+            ).textContent = `${ret.kortbeskrivelse}`;
+            klon.querySelector(".pris").textContent =
+              "Pris: " + ret.pris + ",-";
+
+            main.appendChild(klon);
+          }
+        });
+      }
+    </script>
+  </body>
+</html>
