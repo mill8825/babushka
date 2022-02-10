@@ -31,10 +31,9 @@
       }
 
       .center {
-        margin: 0;
         position: absolute;
-        top: 50%;
         left: 50%;
+        margin-bottom: 420px;
         -ms-transform: translate(-50%, -50%);
         transform: translate(-50%, -50%);
       }
@@ -47,15 +46,14 @@
         width: 100vw;
         height: 100vw;
         position: fixed;
-        background-color: white;
-        top: 0;
-        left: 0;
+        background-color: rgb(237, 246, 249);
+        top: 10px;
       }
 
       #modal article {
         max-width: 900px;
         margin: 2em auto;
-        background-color: white;
+        background-color: rgb(237, 246, 249);
       }
       #header h1 {
         color: black;
@@ -63,12 +61,16 @@
       }
 
       body {
-        background-color: rgb(249, 246, 246);
+        background-color: rgb(237, 246, 249);
       }
 
       .toggle-btn {
         display: none;
         flex-direction: row;
+      }
+
+      .splash {
+        width: 100px;
       }
 
       /* burgermenu */
@@ -98,21 +100,25 @@
           flex: 1 1 100%;
           flex-direction: row;
           margin-left: 50px;
-          gap: 20px;
+          bottom: 20%;
         }
 
         nav ul {
           display: flex;
           flex-flow: column;
         }
+
+        .splash {
+          width: 80px;
+          margin-bottom: 50px;
+        }
       }
     </style>
   </head>
   <header class="banner">
     <button class="toggle-btn">Menu</button>
-
-    <img src="" alt="" />
     <h1>BISTRO BABUSHKA</h1>
+    <img class="splash" src="restaurant.png" alt="" width="10px" />
 
     <nav>
       <div class="container">
