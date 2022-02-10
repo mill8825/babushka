@@ -19,6 +19,12 @@
         width: 300px;
         margin: 8px;
       }
+
+      h1 {
+        font-size: 50px;
+        margin-bottom: 30px;
+      }
+
       .container {
         height: 200px;
         position: relative;
@@ -53,16 +59,61 @@
       }
       #header h1 {
         color: black;
+        place-content: center;
       }
 
       body {
         background-color: rgb(249, 246, 246);
       }
+
+      .toggle-btn {
+        display: none;
+        flex-direction: row;
+      }
+
+      /* burgermenu */
+
+      @media (max-width: 700px) {
+        .toggle-btn {
+          background: transparent;
+          border: none;
+          display: block;
+          min-width: 44px;
+          min-height: 44px;
+          font-size: 1.1rem;
+          cursor: pointer;
+        }
+
+        img {
+          width: 460px;
+        }
+
+        nav {
+          display: none;
+        }
+
+        nav.shown {
+          padding-top: 1rem;
+          display: flex;
+          flex: 1 1 100%;
+          flex-direction: row;
+          margin-left: 50px;
+          gap: 20px;
+        }
+
+        nav ul {
+          display: flex;
+          flex-flow: column;
+        }
+      }
     </style>
   </head>
-  <header>
+  <header class="banner">
+    <button class="toggle-btn">Menu</button>
+
     <img src="" alt="" />
     <h1>BISTRO BABUSHKA</h1>
+
     <nav>
       <div class="container">
         <div class="center">
@@ -97,13 +148,32 @@
       </template>
     </section>
     <script>
+      const knapper = document.querySelector("button");
+      const nav = document.querySelector("nav");
+
+      knapper.addEventListener("click", toggleMenu);
+
+      function toggleMenu() {
+        nav.classList.toggle("shown");
+
+        const menuShown = nav.classList.contains("shown");
+
+        if (menuShown) {
+          knapper.textContent = "Luk";
+          // knapper.classList.add("open");
+        } else {
+          knapper.textContent = "Menu";
+          // knapper.classList.remove("open");
+        }
+      }
+
       const header = document.querySelector("header h1");
       const myHeaders = {
         "x-apikey": "600ec2fb1346a1524ff12de4",
       };
 
       document.addEventListener("DOMContentLoaded", start);
-      // console.log("Line Berner");
+
       let retter;
       let filter = "alle";
       function start() {
